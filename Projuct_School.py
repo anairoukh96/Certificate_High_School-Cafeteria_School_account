@@ -3,6 +3,21 @@
 import time
 from datetime import date
 
+# Add Username & Password
+USERNAME = "admin"
+PASSWORD = "1234"
+def login():
+    print("Please log in to access some the information:")
+    username = input("Enter Username: ")
+    password = input("Enter Password: ")
+
+    if username == USERNAME and password == PASSWORD:
+            print("Login successful!\n")
+            return True
+    else:
+            print("Invalid username or password. Access denied.\n")
+            return False
+    
 # Input information Student
 class student:
     def __init__(self):
@@ -12,6 +27,7 @@ class student:
         self.ID = int(input("Please Enter Your ID: "))
         self.birth = str(input("Please Enter Your Place of birth: "))
         self.phonenum = int(input("Please Enter Your Phone Number: "))
+        
 
 # Print info student
     def print_info(self):
@@ -153,6 +169,7 @@ def main():
 
 # Choose number 1 for certificate High School
     if section_choice == 1:
+        login()
         print("\nPlease choose your section:", "\n")
         print("1. Scientific")
         print("2. Arts", "\n", "*" * 30)
@@ -177,6 +194,7 @@ def main():
 
 # Choose number 2 for School cafeteria
     elif section_choice == 2:
+        login()
         x = cul()
         x.print_info()
     else:
