@@ -1,22 +1,42 @@
 # Function certificate high school
 # Import Function
 import time
+import calendar
 from datetime import date
 
+# Create Calendar
+def Calendar():
+    yy = 2024   # Year
+    mm = 12     # Month
+    # Disable the Calendar
+    print(calendar.month(yy, mm))
+
 # Add Username & Password
-USERNAME = "admin"
-PASSWORD = "1234"
+USERNAME = None
+PASSWORD = None
+
+def Create_Account():
+    global USERNAME , PASSWORD
+    print("Create a new account:")
+    print("*" * 50)
+    USERNAME = input("Enter a new Username: ")
+    PASSWORD = input("Enter a new Password: ")
+    print("Account created successfully!\n")
 def login():
-    print("Please log in to access some the information:")
+    global USERNAME , PASSWORD
+    if USERNAME is None or PASSWORD is None:
+        print("No account found. Please create an account first.\n")
+        return False
+    print("Log in to your account:")
     username = input("Enter Username: ")
     password = input("Enter Password: ")
-
     if username == USERNAME and password == PASSWORD:
-            print("Login successful!\n")
-            return True
+        print("Login successful! Access granted.\n")
+        return True
     else:
-            print("Invalid username or password. Access denied.\n")
-            return False
+        print("Invalid username or password. Access denied.\n")
+        exit()
+
     
 # Input information Student
 class student:
@@ -81,6 +101,7 @@ class nerd:
         print(f"*","Average: ", f"{int(Avg * 100)/100}".ljust(46),f"* Time:",current_time,"".ljust(22),"*")
         print(f"* Result: ",f"Pass" if Avg >= 50 else "Fail","".ljust(42),f"* Date:",d,"".ljust(20),"*")
         print(f"*" * 100)
+        Calendar()
 
 
 #Function Arts
@@ -121,7 +142,7 @@ class NotNerd:
         print(f"*","Average: ",f"{int(Avg * 100)/100}".ljust(46),f"* Time:",current_time,"".ljust(22),"*")
         print(f"* Result: ",f"Pass" if Avg >= 50 else "Fail","".ljust(42),f"* Date:",d,"".ljust(20),"*")
         print(f"*" * 100)
-
+        Calendar()
 
 ########################################################################################################################################################################
 # School cafeteria
@@ -156,10 +177,10 @@ class cul:
             print(f"* Daily payment: {daily_pyment:.2f} per day for 20 days.".ljust(78), "*")
             print("*" * 80)
         else:
-            print("*")
-
+            print("\n")
+        Calendar()
 # Choose number 1 or 2 for certificate High School & School cafeteria
-
+Create_Account()
 def main():
     print("\nPlease choose your section:","\n")
     print("1. certificate")
