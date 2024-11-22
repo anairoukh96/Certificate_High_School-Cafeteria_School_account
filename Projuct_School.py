@@ -37,6 +37,38 @@ def login():
         print("Invalid username or password. Access denied.\n")
         exit()
 
+# Attendance Student ...> نظام الحضور والغياب
+attendance_record = {}
+
+def mark_attendance():
+    student_name = input("Enter the student's name to mark attendance: ")
+    status = input("Enter status (Present/Absent): ").capitalize()
+    if status in ["Present", "Absent"]:
+        attendance_record[student_name] = status
+        print(f"Attendance marked for {student_name} as {status}.")
+    else:
+        print("Invalid status. Please enter 'Present' or 'Absent'.")
+def view_attendance():
+    print("\nAttendance Record:")
+    print("*" * 50)
+    for name , status in attendance_record.items():
+        print(f"Student: {name.ljust(23)} Status: {status}")
+    print("*" * 50)
+def attendance_menu():
+    while True:
+        print("\nAttendance System:")
+        print("1. Mark Attendance")
+        print("2. View Attendance")
+        print("3. Exit to Main Menu")
+        choice = int(input("Enter your choice: "))
+        if choice == 1:
+            mark_attendance()
+        elif choice == 2:
+            view_attendance()
+        elif choice == 3:
+            break
+        else:
+            print("Invalid choice. Please try again.")
     
 # Input information Student
 class student:
@@ -177,15 +209,16 @@ class cul:
             print(f"* Daily payment: {daily_pyment:.2f} per day for 20 days.".ljust(78), "*")
             print("*" * 80)
         else:
-            print("\n")
+            print("*")
         Calendar()
 # Choose number 1 or 2 for certificate High School & School cafeteria
 Create_Account()
 def main():
     print("\nPlease choose your section:","\n")
     print("1. certificate")
-    print("2. School cafeteria","\n", "*" * 30)
-    section_choice = int(input("Please Enter number 1 or 2: "))
+    print("2. School cafeteria")
+    print("3. Attendance System","\n", "*" * 30)
+    section_choice = int(input("Please Enter the number: "))
     print("*" * 50)
 
 # Choose number 1 for certificate High School
@@ -218,6 +251,8 @@ def main():
         login()
         x = cul()
         x.print_info()
+    elif section_choice == 3:
+        attendance_menu()
     else:
         print("\nPlease try again","\n")
 
