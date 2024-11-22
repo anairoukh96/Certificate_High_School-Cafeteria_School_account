@@ -2,6 +2,7 @@
 # Import Function
 import time
 import calendar
+import random
 from datetime import date
 
 # Create Calendar
@@ -237,14 +238,90 @@ class cul:
         else:
             print("*")
         Calendar()
-# Choose number 1 or 2 for certificate High School & School cafeteria
+########################################################################################################################################################################
+# Sudoku Game
+class SudokuSolver:
+    def __init__(self):
+        self.grid = [[0 for _ in range(9)] for _ in range(9)]
+
+    # دالة لطباعة الشبكة
+    def print_grid(self):
+        for i in range(9):
+            for j in range(9):
+                print(self.grid[i][j], end=" ")
+            print()
+
+    # دالة للعثور على موقع فارغ في الشبكة
+    def find_empty_location(self, l):
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] == 0:
+                    l[0] = row
+                    l[1] = col
+                    return True
+        return False
+
+    # التحقق إذا كان الرقم موجودًا في الصف
+    def used_in_row(self, row, num):
+        for i in range(9):
+            if self.grid[row][i] == num:
+                return True
+        return False
+
+    # التحقق إذا كان الرقم موجودًا في العمود
+    def used_in_col(self, col, num):
+        for i in range(9):
+            if self.grid[i][col] == num:
+                return True
+        return False
+
+    # التحقق إذا كان الرقم موجودًا في المربع 3x3
+    def used_in_box(self, row, col, num):
+        for i in range(3):
+            for j in range(3):
+                if self.grid[i + row][j + col] == num:
+                    return True
+        return False
+
+    # التحقق من قانونية وضع الرقم في الموقع المحدد
+    def check_location_is_safe(self, row, col, num):
+        return (not self.used_in_row(row, num) and
+                not self.used_in_col(col, num) and
+                not self.used_in_box(row - row % 3, col - col % 3, num))
+
+    # حل السودوكو باستخدام الباك تراكينج
+    def solve_sudoku(self):
+        l = [0, 0]
+        if not self.find_empty_location(l):
+            return True
+        row, col = l[0], l[1]
+        for num in range(1, 10):
+            if self.check_location_is_safe(row, col, num):
+                self.grid[row][col] = num
+                if self.solve_sudoku():
+                    return True
+                self.grid[row][col] = 0
+        return False
+
+    # إنشاء شبكة سودوكو عشوائية قابلة للحل
+    def generate_solvable_grid(self):
+        for _ in range(random.randint(12, 20)):  # إضافة أرقام عشوائية بين 12 و 20 خلية
+            row, col = random.randint(0, 8), random.randint(0, 8)
+            num = random.randint(1, 9)
+            if self.grid[row][col] == 0 and self.check_location_is_safe(row, col, num):
+                self.grid[row][col] = num
+
+
+########################################################################################################################################################################
+# Choose number
 Create_Account()
 def main():
     print("\nPlease choose your section:","\n")
     print("1. certificate")
     print("2. School cafeteria")
     print("3. Attendance System")
-    print("4. Quiz System","\n", "*" * 30)
+    print("4. Quiz System")
+    print("5. Sudoku Game","\n", "*" * 30)
     section_choice = int(input("Please Enter the number: "))
     print("*" * 50)
 
@@ -278,10 +355,24 @@ def main():
         login()
         x = cul()
         x.print_info()
+# Choose number 3 for Attendance System
     elif section_choice == 3:
         attendance_menu()
+# Choose number 4 for Quiz System
     elif section_choice == 4:
         QuizSystem()
+# Choose number 5 for Sudoku Game
+    elif section_choice == 5:
+        if __name__ == "__main__":
+            sudoku = SudokuSolver()
+            sudoku.generate_solvable_grid()
+            print("Initial Sudoku Grid:")
+            sudoku.print_grid()
+            if sudoku.solve_sudoku():
+                print("\nSolved Sudoku Grid:")
+                sudoku.print_grid()
+        else:
+            print("No solution exists")
     else:
         print("\nPlease try again","\n")
 
