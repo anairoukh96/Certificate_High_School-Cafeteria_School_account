@@ -66,6 +66,7 @@ def attendance_menu():
             mark_attendance()
         elif choice == 2:
             view_attendance()
+            Calendar()
         elif choice == 3:
             break
         else:
@@ -96,6 +97,8 @@ def QuizSystem():
                 correctCount += 1
 
         print("Student", i, "'s correct count is", correctCount,"/10")
+    print("*" * 50)
+    Calendar()
     
 # Input information Student
 class student:
