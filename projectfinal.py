@@ -4,7 +4,6 @@ import time
 from datetime import date
 import os
 from Crypto.Cipher import AES
-import hashlib
 import base64
 
 # Generate AES encryption key
@@ -24,10 +23,6 @@ def aes_decrypt(encrypted_data, key):
     cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
     decrypted_data = cipher.decrypt_and_verify(ciphertext, tag)
     return decrypted_data.decode()
-
-# Hash function (SHA-256)
-def hash_data(data):
-    return hashlib.sha256(data.encode()).hexdigest()
 
 # Save key for decryption
 def save_encryption_key(key):
